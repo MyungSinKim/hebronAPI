@@ -1,0 +1,15 @@
+spring:
+    application:
+        name: ${name}
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:8889/hebron_api
+        username: root
+        password: root
+
+    jpa:
+      hibernate:
+          ddl-auto: none
+
+server:
+    port: 9000
