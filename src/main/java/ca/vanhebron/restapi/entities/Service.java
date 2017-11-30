@@ -1,5 +1,6 @@
 package ca.vanhebron.restapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +19,12 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Service {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
 	private String name;
+	private String korean;
+
 }
