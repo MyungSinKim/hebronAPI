@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Nov 30, 2017 at 12:41 AM
+-- Generation Time: Dec 01, 2017 at 01:54 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -13,6 +13,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `hebron_api`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `person`
+--
+
+CREATE TABLE `person` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `telephone` varchar(45) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `service_id` int(11) DEFAULT NULL,
+  `photo` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`id`, `first_name`, `last_name`, `gender`, `email`, `telephone`, `role_id`, `service_id`, `photo`) VALUES
+(1, 'test', 'test', 'MALE', NULL, NULL, 1, 3, NULL),
+(2, '333', '333', 'FEMALE', NULL, NULL, 2, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,6 +121,14 @@ INSERT INTO `user` (`id`, `name`, `email`) VALUES
 --
 
 --
+-- Indexes for table `person`
+--
+ALTER TABLE `person`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id_idx` (`role_id`),
+  ADD KEY `service_id_idx` (`service_id`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -117,6 +151,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `person`
+--
+ALTER TABLE `person`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
@@ -131,3 +170,13 @@ ALTER TABLE `service`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `person`
+--
+ALTER TABLE `person`
+  ADD CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_service_id` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
