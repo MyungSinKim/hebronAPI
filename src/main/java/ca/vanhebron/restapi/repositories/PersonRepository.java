@@ -24,4 +24,10 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 	@Query(value = "SELECT * FROM person t where t.first_name = :name OR t.last_name = :name", nativeQuery = true)
 	List<Person> findListByName(@Param("name") String name);
 
+
+	//TODO:
+	//https://www.javabullets.com/access-entitymanager-spring-data-jpa/
+
+
+
 }

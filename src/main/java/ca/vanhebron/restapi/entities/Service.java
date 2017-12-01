@@ -22,9 +22,8 @@ import javax.persistence.Id;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Service {
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String korean;
-
 }

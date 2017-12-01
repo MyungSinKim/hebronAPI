@@ -24,14 +24,12 @@ public class Person {
 	private String firstName;
 	private String lastName;
 
-
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	private String email;
 	private String telephone;
 
-	//CURRENT_ROLE
 	@ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
@@ -41,4 +39,9 @@ public class Person {
 	private Service service;
 
 	private String photo;
+
+	//TODO
+	// birthday
+	// status (CANADIAN, KOREAN, PR, WORKING VISA, STUDENT, VISITOR
+	//
 }

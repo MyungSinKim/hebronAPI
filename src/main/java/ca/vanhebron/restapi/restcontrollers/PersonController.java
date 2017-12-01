@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -19,17 +22,38 @@ import java.util.List;
 @RequestMapping(path = "/person") // This means URL's start with /demo (after Application path)
 public class PersonController {
 
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+
 	@Autowired
 	private PersonRepository personRepository;
 
 	@RequestMapping(value = "/all", method = GET)
 	public ResponseEntity<List<Person>> getPerson(@RequestParam(value = "name", defaultValue = "World") String name) {
 
+		testFunction();
+
 		//List<Person> personList = personRepository.findAll();
-
 		List<Person> personList = personRepository.findListByName(name);
+		//return ResponseEntity.ok(personList);
 
-		return ResponseEntity.ok(personList);
+		return ResponseEntity.ok(testFunction());
+
+	}
+
+
+	private List<Person> testFunction() {
+		Query query =
+				entityManager.createNativeQuery("SELECT person.id,first_name,last_name,gender,email,telephone,role_id,service_id,photo " +
+						"FROM person JOIN role ON person.role_id = role.id WHERE role.name='Senior Pastor'", Person.class);
+		List<Person> results = query.getResultList();
+//		for (Person c : results) {
+//			System.out.println(c.getFirstName() + " => " + c.getRole().getName());
+//		}
+
+		return results;
 	}
 
 }
