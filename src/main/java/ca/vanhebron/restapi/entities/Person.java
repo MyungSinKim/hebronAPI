@@ -1,10 +1,12 @@
 package ca.vanhebron.restapi.entities;
 
 import ca.vanhebron.restapi.models.Gender;
+import ca.vanhebron.restapi.models.Status;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by rocky.lee on 2017-11-29.
@@ -40,8 +42,13 @@ public class Person {
 
 	private String photo;
 
-	//TODO
-	// birthday
-	// status (CANADIAN, KOREAN, PR, WORKING VISA, STUDENT, VISITOR
-	//
+	private Date birthday;
+
+	@Enumerated(EnumType.STRING)
+	private Status status;
+
+//	@ManyToOne(targetEntity = CellGroup.class, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "cellgroup_id")
+//	private CellGroup cellGroup;
+
 }
