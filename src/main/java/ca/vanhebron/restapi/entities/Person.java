@@ -47,8 +47,14 @@ public class Person {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-//	@ManyToOne(targetEntity = CellGroup.class, fetch = FetchType.LAZY)
-//	@JoinColumn(name = "cellgroup_id")
-//	private CellGroup cellGroup;
+	@ManyToOne(targetEntity = CellGroup.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "cellgroup_id")
+	private CellGroup cellGroup;
 
+
+	@Override
+	public String toString() {
+		return "Person[id=" + id + ", firstName=" + firstName
+				+ "]";
+	}
 }

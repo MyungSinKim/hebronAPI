@@ -15,6 +15,9 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
 	List<Person> findAll();
 
+	@Query(value="SELECT * FROM Person  where id = :id", nativeQuery = true)
+	Person findOneById(@Param("id")Integer id);
+
 	@Query("SELECT t.firstName FROM Person t where t.id = :id")
 	String findTitleById(@Param("id") Integer id);
 
@@ -22,5 +25,6 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 	//@Query(value = "SELECT id,first_name,last_name,gender,email,telephone,role_id,service_id,photo FROM Person t where t.first_name = :name OR t.last_name = :name", nativeQuery = true)
 	@Query(value = "SELECT * FROM person t where t.first_name = :name OR t.last_name = :name", nativeQuery = true)
 	List<Person> findListByName(@Param("name") String name);
+
 
 }

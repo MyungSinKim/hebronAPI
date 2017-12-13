@@ -1,5 +1,6 @@
 package ca.vanhebron.restapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +27,16 @@ public class CellGroup {
 	private String name;
 	private String korean;
 
-	@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "leader_id")
 	private Person groupLeader;
 
 	private String memo;
+
+	@Override
+	public String toString() {
+		return "CellGroup[id=" + id + ", name=" + name
+				+ "]";
+	}
 }
