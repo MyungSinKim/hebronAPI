@@ -88,8 +88,8 @@ public class PersonService {
 	}
 
 	@Transactional
-	public Person updatePerson(Person updatePersonData) {
-		Person originalData = personRepository.findOne(updatePersonData.getId());
+	public Person updatePerson(Long personId, Person updatePersonData) {
+		Person originalData = personRepository.findOne(personId);
 
 		if (isNull(originalData)) {
 			throw new CustomException("Can not find the person with Id");

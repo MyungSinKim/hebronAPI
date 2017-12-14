@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by rocky.lee on 2017-11-29.
- */
 @RestController
 @RequestMapping(path = "/person")
 public class PersonResource {
@@ -59,9 +56,10 @@ public class PersonResource {
 		return ResponseEntity.ok(personService.createPerson(personRequest));
 	}
 
-	@RequestMapping(method = PUT)
+	@RequestMapping(value = "/{personId}", method = PUT)
 	public ResponseEntity<Person> updatePerson(
+			@PathVariable Long personId,
 			@RequestBody Person personRequest) {
-		return ResponseEntity.ok(personService.updatePerson(personRequest));
+		return ResponseEntity.ok(personService.updatePerson(personId, personRequest));
 	}
 }
