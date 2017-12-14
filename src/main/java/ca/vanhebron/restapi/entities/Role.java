@@ -14,7 +14,7 @@ import javax.persistence.Id;
 /**
  * Created by rocky.lee on 2017-11-29.
  */
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Builder
 @Data
 @NoArgsConstructor
@@ -23,7 +23,7 @@ import javax.persistence.Id;
 public class Role {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	private String name;
 	private String korean;
 }
