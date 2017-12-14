@@ -22,14 +22,17 @@ import javax.persistence.*;
 public class CellGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 
 	private String name;
 	private String korean;
 
+	@Column(name = "leader_id")
+	private Long leaderId;
+
 	@JsonIgnore
 	@OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "leader_id")
+	@JoinColumn(name = "leader_id", insertable = false, updatable = false)
 	private Person groupLeader;
 
 	private String memo;

@@ -22,6 +22,6 @@ public interface CellGroupRepository extends CrudRepository<CellGroup, Long> {
 
 
 	@Query(value ="SELECT t.leader_id FROM cellgroup t where t.id = :id", nativeQuery = true)
-	Integer findLeaderById(@Param("id") Integer id);
+	Integer findLeaderById(@Param("id") Long id);
 
 }

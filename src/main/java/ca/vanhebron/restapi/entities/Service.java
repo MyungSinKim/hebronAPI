@@ -23,7 +23,7 @@ import javax.persistence.Id;
 public class Service {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	private String name;
 	private String korean;
 }

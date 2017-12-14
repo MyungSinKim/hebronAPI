@@ -10,6 +10,7 @@ spring:
     jpa:
       hibernate:
           ddl-auto: none
+      show-sql: true
 
 server:
     port: 9000

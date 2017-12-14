@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseCellGroup {
-	private Integer id;
+	private Long id;
 	private String name;
 	private String korean;
 	private Person groupLeader;

@@ -1,4 +1,4 @@
-package ca.vanhebron.restapi.restcontrollers;
+package ca.vanhebron.restapi.resources;
 
 import ca.vanhebron.restapi.models.Greeting;
 import ca.vanhebron.restapi.models.Hosting;
