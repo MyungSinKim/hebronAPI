@@ -6,6 +6,21 @@ spring:
         url: jdbc:mysql://localhost:8889/hebron_api
         username: root
         password: root
+        # the maximum amount of time to wait on an empty pool before throwing an exception
+        maxWait: 1
+
+        # the SQL query to run when validating a connection's liveness
+        validationQuery: "/* MyApplication Health Check */ SELECT 1"
+
+        # the minimum number of connections to keep open
+        minIdle: 8
+
+        # the maximum number of connections to keep open
+        maxIdle: 32
+
+        # whether or not idle connections should be validated
+        testWhileIdle: true
+        testOnBorrow: true
 
     jpa:
       hibernate:

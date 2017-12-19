@@ -1,13 +1,14 @@
 package ca.vanhebron.restapi.services;
 
+import static ca.vanhebron.restapi.constants.CustomConstants.CANNOT_FIND_PERSON_BY_ID;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-import ca.vanhebron.restapi.entities.Person;
+import ca.vanhebron.restapi.entities.HebronPerson;
 import ca.vanhebron.restapi.exceptions.CustomException;
 import ca.vanhebron.restapi.models.PersonSearchFilter;
-import ca.vanhebron.restapi.repositories.CellGroupRepository;
-import ca.vanhebron.restapi.repositories.PersonRepository;
+import ca.vanhebron.restapi.repositories.HebronCellGroupRepository;
+import ca.vanhebron.restapi.repositories.HebronPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,53 +19,46 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by rocky.lee on 2017-12-13.
- */
 @Service
 public class PersonService {
 
 	private static final String SELECT_QUERY = "SELECT id,first_name,last_name,gender,email,telephone," +
 			"role_id,service_id,cellgroup_id,photo,birthday,status " +
-			"FROM Person ";
+			"FROM hebron_person ";
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Autowired
-	private PersonRepository personRepository;
+	private HebronPersonRepository personRepository;
 
 	@Autowired
-	private CellGroupRepository cellGroupRepository;
+	private HebronCellGroupRepository cellGroupRepository;
 
-	public List<Person> getAllPerson() {
+	public List<HebronPerson> getAllPerson() {
 		return personRepository.findAll();
 	}
 
-	public List<Person> getAllPersonSearch(PersonSearchFilter personSearchFilter) {
+	public List<HebronPerson> getAllPersonSearch(PersonSearchFilter personSearchFilter) {
 		List<String> whereConditions = new ArrayList<>();
 		String condition = "";
 
-		if (nonNull(personSearchFilter.getName())) {
+		if (nonNull(personSearchFilter.getName()) && !personSearchFilter.getName().isEmpty()) {
 			condition = " (first_name LIKE '%" + personSearchFilter.getName() + "%' OR last_name LIKE '%" +
 					personSearchFilter.getName() + "%') ";
-
 			whereConditions.add(condition);
 		}
 
 		if (nonNull(personSearchFilter.getRoleId())) {
-			condition = " role_id = " + personSearchFilter.getRoleId();
-			whereConditions.add(condition);
+			whereConditions.add(" role_id = " + personSearchFilter.getRoleId());
 		}
 
 		if (nonNull(personSearchFilter.getServiceId())) {
-			condition = " service_id = " + personSearchFilter.getServiceId();
-			whereConditions.add(condition);
+			whereConditions.add(" service_id = " + personSearchFilter.getServiceId());
 		}
 
 		if (nonNull(personSearchFilter.getCellgroupId())) {
-			condition = " cellgroup_id = " + personSearchFilter.getCellgroupId();
-			whereConditions.add(condition);
+			whereConditions.add(" cellgroup_id = " + personSearchFilter.getCellgroupId());
 		}
 
 		String finalWhereConditions = " ";
@@ -74,25 +68,25 @@ public class PersonService {
 
 		Query query = entityManager.createNativeQuery(
 				SELECT_QUERY + finalWhereConditions,
-				Person.class);
+				HebronPerson.class);
 
-		List<Person> results = query.getResultList();
+		List<HebronPerson> results = query.getResultList();
 		return results;
 	}
 
 	@Transactional
-	public Person createPerson(Person person) {
-		Person result = personRepository.save(person);
+	public HebronPerson createPerson(HebronPerson person) {
+		HebronPerson result = personRepository.save(person);
 		entityManager.refresh(result);
 		return result;
 	}
 
 	@Transactional
-	public Person updatePerson(Long personId, Person updatePersonData) {
-		Person originalData = personRepository.findOne(personId);
+	public HebronPerson updatePerson(Long personId, HebronPerson updatePersonData) {
+		HebronPerson originalData = personRepository.findOne(personId);
 
 		if (isNull(originalData)) {
-			throw new CustomException("Can not find the person with Id");
+			throw new CustomException(CANNOT_FIND_PERSON_BY_ID);
 		}
 
 		originalData.setFirstName(updatePersonData.getFirstName());
@@ -109,7 +103,15 @@ public class PersonService {
 		return personRepository.save(originalData);
 	}
 
-	public Person getPerson(Long personId) {
-		return personRepository.findOne(personId);
+	public HebronPerson getPerson(Long personId) {
+		HebronPerson result = personRepository.findOne(personId);
+		if (isNull(result)) {
+			throw new CustomException(CANNOT_FIND_PERSON_BY_ID);
+		}
+		return result;
+	}
+
+	public void deletePerson(Long personId) {
+		personRepository.delete(personId);
 	}
 }

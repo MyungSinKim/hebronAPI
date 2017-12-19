@@ -18,7 +18,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Person {
+@Table(name="hebron_person")
+public class HebronPerson {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -41,13 +42,13 @@ public class Person {
 	@Column(name = "cellgroup_id")
 	private Long cellgroupId;
 
-	@ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = HebronRole.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id", insertable = false, updatable = false)
-	private Role role;
+	private HebronRole role;
 
-	@ManyToOne(targetEntity = Service.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = HebronService.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "service_id", insertable = false, updatable = false)
-	private Service service;
+	private HebronService service;
 
 	private String photo;
 
@@ -56,9 +57,9 @@ public class Person {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@ManyToOne(targetEntity = CellGroup.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = HebronCellGroup.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "cellgroup_id", insertable = false, updatable = false)
-	private CellGroup cellGroup;
+	private HebronCellGroup cellGroup;
 
 	@Override
 	public String toString() {

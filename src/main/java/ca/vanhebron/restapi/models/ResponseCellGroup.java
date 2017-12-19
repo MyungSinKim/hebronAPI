@@ -1,14 +1,11 @@
 package ca.vanhebron.restapi.models;
 
-import ca.vanhebron.restapi.entities.Person;
+import ca.vanhebron.restapi.entities.HebronPerson;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Created by rocky.lee on 2017-12-05.
- */
 @Builder
 @Data
 @NoArgsConstructor
@@ -17,6 +14,6 @@ public class ResponseCellGroup {
 	private Long id;
 	private String name;
 	private String korean;
-	private Person groupLeader;
+	private HebronPerson groupLeader;
 	private String memo;
 }

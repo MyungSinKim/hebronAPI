@@ -18,8 +18,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name="cellgroup")
-public class CellGroup {
+@Table(name="hebron_cellgroup")
+public class HebronCellGroup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -31,9 +31,9 @@ public class CellGroup {
 	private Long leaderId;
 
 	@JsonIgnore
-	@OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
+	@OneToOne(targetEntity = HebronPerson.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "leader_id", insertable = false, updatable = false)
-	private Person groupLeader;
+	private HebronPerson groupLeader;
 
 	private String memo;
 

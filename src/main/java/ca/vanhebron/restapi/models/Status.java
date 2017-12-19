@@ -1,10 +1,7 @@
 package ca.vanhebron.restapi.models;
 
-import static com.mysql.jdbc.StringUtils.isNullOrEmpty;
+import static org.h2.util.StringUtils.isNullOrEmpty;
 
-/**
- * Created by rocky.lee on 2017-12-01.
- */
 public enum Status {
 
 	CANADIAN, KOREAN, PR, WORKING_VISA, STUDENT_VISA, VISITOR;
