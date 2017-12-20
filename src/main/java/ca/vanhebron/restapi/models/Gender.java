@@ -1,10 +1,7 @@
 package ca.vanhebron.restapi.models;
 
-import static com.mysql.jdbc.StringUtils.isNullOrEmpty;
+import static org.h2.util.StringUtils.isNullOrEmpty;
 
-/**
- * Created by rocky.lee on 2017-11-29.
- */
 public enum Gender {
 	MALE, FEMALE;
 

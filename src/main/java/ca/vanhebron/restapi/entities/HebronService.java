@@ -9,27 +9,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * Created by rocky.lee on 2017-11-28.
+ * Created by rocky.lee on 2017-11-29.
  */
-
-@Entity
+@Entity // This tells Hibernate to make a table out of this class
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "user")
-public class User {
+@Table(name="hebron_service")
+public class HebronService {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(nullable = false, unique = true)
-	private String username;
-
-	private String password;
-
-	@Transient
-	private String passwordConfirm;
-
+	private String name;
+	private String korean;
 }

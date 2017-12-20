@@ -6,24 +6,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by rocky.lee on 2017-11-29.
+ * Created by rocky.lee on 2017-12-18.
  */
+
 @Entity
+@Table(name = "role")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role {
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	private String name;
-	private String korean;
+
 }
